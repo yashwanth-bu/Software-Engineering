@@ -32,11 +32,16 @@ import ConnectDB from "./db.js";
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST_NAME || "0.0.0.0";
 
-async function runServer(server) {
-    await ConnectDB();
-    server.listen(PORT, HOST, function () {
-        console.log(`Server Running at http://${HOST}:${PORT}`);
-    });
+async function runServer(server){
+    try {
+        await ConnectDB();
+        server.listen(3000, 'localhost', function () {
+            console.log("Server Started Successfully!");
+        })
+    } catch (error) {
+        console.log(error.message);
+        process.exit(1);
+    }
 }
 
 export default runServer;
