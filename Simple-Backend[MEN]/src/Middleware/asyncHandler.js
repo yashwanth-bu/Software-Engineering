@@ -36,4 +36,21 @@ function asyncHandler(fn) {
 }
 
 export default asyncHandler;
+// Working process : 
+// When the app starts, asyncHandler wraps the async controller and returns a new function.
+//   Express later calls that returned function (getAllNotes) when a request comes in;
+// it executes the async logic inside a Promise, and if the Promise resolves the request completes,
+//   and if it rejects the error is caught and passed to the error-handling middleware.
+
+
+// the way this async handler works [another way to write the code]
+
+// const fn = async (req, res) => {
+//   const notes = await Note.find({});
+//   res.json(notes);
+// };
+
+// export const getAllNotes = (req, res, next) => {
+//   Promise.resolve(fn(req, res, next)).catch(next);
+// };
 
